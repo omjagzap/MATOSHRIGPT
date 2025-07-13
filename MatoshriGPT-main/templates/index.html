@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatoshriGPT Chat</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1 class="chat-title">MatoshriGPT</h1>
+        </div>
+        <div class="chat-box" id="chat-box"></div>
+        <form class="chat-form" id="chat-form">
+            <input 
+                type="text" 
+                id="user-input" 
+                class="chat-input" 
+                placeholder="Type your message here..." 
+                autocomplete="off" 
+                required>
+            <button type="submit" class="chat-submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById("chat-form");
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        chatForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const userMessage = userInput.value;
+            
+            // Add user message to chat box
+            chatBox.innerHTML += `<div class="chat-message user-message">${userMessage}</div>`;
+            userInput.value = "";
+
+            // Send message to backend
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage }),
+            });
+
+            const data = await response.json();
+
+            // Add bot reply to chat box
+            chatBox.innerHTML += `<div class="chat-message bot-message">${data.reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+        });
+    </script>
+</body>
+</html>
