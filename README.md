@@ -1,7 +1,7 @@
 ## MatoshriGPT: AI-Powered Campus Assistant
 ## Table of Contents
-Introduction
-Problem Statement
+. Introduction
+. Problem Statement
 Objectives
 Scope
 Methodology
