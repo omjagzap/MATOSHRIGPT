@@ -1,1 +1,1 @@
-##MatoshriGPT: AI-Powered Campus Assistant
+## MatoshriGPT: AI-Powered Campus Assistant
